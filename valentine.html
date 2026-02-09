@@ -12,13 +12,47 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            bottom: -50px;
+            right: -50px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(20px);
+            }
         }
 
         .container {
@@ -29,6 +63,8 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 600px;
             animation: slideIn 0.6s ease-out;
+            position: relative;
+            z-index: 10;
         }
 
         @keyframes slideIn {
@@ -39,6 +75,40 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart-float {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.7;
+            animation: heartFloat 3s ease-in infinite;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
             }
         }
 
@@ -56,10 +126,25 @@
         }
 
         .subtitle {
-            color: #666;
+            color: #999;
             margin-bottom: 40px;
             font-size: 18px;
             font-weight: 500;
+        }
+
+        .emoji-container {
+            font-size: 80px;
+            margin: 20px 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         .buttons {
@@ -81,14 +166,14 @@
         }
 
         .yes-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
         }
 
         .yes-btn:hover {
             transform: scale(1.08);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 6px 25px rgba(255, 107, 107, 0.6);
         }
 
         .yes-btn:active {
@@ -116,7 +201,7 @@
             display: none;
             margin-top: 40px;
             padding: 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
             color: white;
             border-radius: 15px;
             font-size: 18px;
@@ -161,6 +246,10 @@
                 font-size: 42px;
             }
 
+            .emoji-container {
+                font-size: 100px;
+            }
+
             .buttons {
                 flex-direction: row;
             }
@@ -175,6 +264,10 @@
 
             h1 {
                 font-size: 32px;
+            }
+
+            .emoji-container {
+                font-size: 80px;
             }
 
             .buttons {
@@ -202,6 +295,11 @@
             .subtitle {
                 font-size: 16px;
                 margin-bottom: 30px;
+            }
+
+            .emoji-container {
+                font-size: 70px;
+                margin: 15px 0;
             }
 
             .buttons {
@@ -239,6 +337,11 @@
                 margin-bottom: 20px;
             }
 
+            .emoji-container {
+                font-size: 50px;
+                margin: 10px 0;
+            }
+
             .buttons {
                 flex-direction: row;
                 gap: 15px;
@@ -254,12 +357,15 @@
     </style>
 </head>
 <body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
     <div class="container">
+        <div class="emoji-container">💝</div>
         <h1><span id="toName">Name</span>, will you be my Valentine?</h1>
         <p class="subtitle">Choose wisely. (The "No" button is… shy.)</p>
 
         <div class="buttons">
-            <button class="yes-btn" onclick="respondYes()">YES</button>
+            <button class="yes-btn" onclick="respondYes()">YES 💕</button>
             <button class="no-btn" id="noBtn" onclick="moveNo()">NO</button>
         </div>
 
@@ -276,8 +382,25 @@
             return urlParams.get(param) || '';
         }
 
+        // Create floating hearts background
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['💕', '💖', '💗', '💓', '💞'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-float';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+                container.appendChild(heart);
+            }
+        }
+
         // Set names from URL parameters
         window.addEventListener('load', function() {
+            createFloatingHearts();
             const toName = getUrlParam('valentineName');
             
             if (toName) {
@@ -338,29 +461,37 @@
 
         // Create confetti effect
         function createConfetti() {
-            for (let i = 0; i < 50; i++) {
+            const emojis = ['💕', '💖', '💗', '💓', '💞', '💝', '🌹', '⭐', '✨'];
+            
+            for (let i = 0; i < 80; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
-                confetti.innerHTML = '💕';
+                confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
                 confetti.style.left = Math.random() * 100 + '%';
                 confetti.style.top = '-10px';
                 confetti.style.fontSize = '24px';
                 confetti.style.opacity = Math.random();
+                confetti.style.animation = `confettiFall ${2 + Math.random() * 2}s linear forwards`;
                 document.body.appendChild(confetti);
 
-                // Animate falling
-                let top = -10;
-                const interval = setInterval(() => {
-                    top += Math.random() * 3 + 2;
-                    confetti.style.top = top + 'px';
-                    
-                    if (top > window.innerHeight) {
-                        clearInterval(interval);
-                        confetti.remove();
-                    }
-                }, 30);
+                // Remove after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
             }
         }
+
+        // Add confetti fall animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confettiFall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
