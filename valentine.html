@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff6b9d 0%, #feca57 50%, #ee5a6f 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,10 +24,10 @@
         .container {
             text-align: center;
             background: white;
-            padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
             animation: slideIn 0.6s ease-out;
         }
 
@@ -42,86 +42,69 @@
             }
         }
 
-        .heart {
-            font-size: 60px;
-            margin-bottom: 20px;
-            animation: heartbeat 1s infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-        }
-
         h1 {
-            color: #ff6b9d;
-            margin-bottom: 10px;
-            font-size: 32px;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 38px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .highlighted-name {
+            color: #667eea;
+            font-weight: 800;
         }
 
         .subtitle {
             color: #666;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-size: 18px;
-        }
-
-        .names {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-
-        .name-item {
-            margin: 10px 0;
-            font-size: 16px;
-            color: #333;
-        }
-
-        .name-label {
-            font-weight: bold;
-            color: #ff6b9d;
+            font-weight: 500;
         }
 
         .buttons {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 50px;
         }
 
         button {
-            padding: 15px 40px;
-            font-size: 16px;
+            padding: 16px 50px;
+            font-size: 18px;
             font-weight: bold;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 120px;
+            min-width: 140px;
         }
 
         .yes-btn {
-            background: linear-gradient(135deg, #ff6b9d, #ee5a6f);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
         .yes-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+            transform: scale(1.08);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .yes-btn:active {
+            transform: scale(0.96);
         }
 
         .no-btn {
-            background: #e9ecef;
+            background: #f0f0f0;
             color: #333;
+            border: 2px solid #ddd;
+            position: relative;
         }
 
         .no-btn:hover {
-            background: #dee2e6;
+            background: #e8e8e8;
+            border-color: #ccc;
         }
 
         .no-btn.moving {
@@ -131,13 +114,29 @@
 
         .success-message {
             display: none;
-            margin-top: 30px;
-            padding: 20px;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            border-radius: 10px;
-            font-size: 16px;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            font-size: 18px;
+            animation: successPop 0.6s ease-out;
+        }
+
+        @keyframes successPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-message h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
         }
 
         .confetti {
@@ -147,16 +146,6 @@
             pointer-events: none;
         }
 
-        .gif-container {
-            margin: 20px 0;
-        }
-
-        .gif-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
         /* Desktop - Landscape */
         @media (min-width: 1024px) and (orientation: landscape) {
             body {
@@ -164,12 +153,12 @@
             }
 
             .container {
-                padding: 40px 60px;
+                padding: 50px 70px;
                 max-width: 700px;
             }
 
             h1 {
-                font-size: 36px;
+                font-size: 42px;
             }
 
             .buttons {
@@ -185,7 +174,7 @@
             }
 
             h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
 
             .buttons {
@@ -202,32 +191,29 @@
             .container {
                 padding: 40px 20px;
                 max-width: 90vw;
+                border-radius: 20px;
             }
 
             h1 {
-                font-size: 24px;
+                font-size: 28px;
+                margin-bottom: 20px;
             }
 
             .subtitle {
-                font-size: 14px;
+                font-size: 16px;
+                margin-bottom: 30px;
             }
 
             .buttons {
                 flex-direction: column;
                 gap: 15px;
+                margin-top: 30px;
             }
 
             button {
                 width: 100%;
-                padding: 12px 30px;
-            }
-
-            .heart {
-                font-size: 50px;
-            }
-
-            .gif-container img {
-                max-height: 150px;
+                padding: 14px 30px;
+                font-size: 16px;
             }
         }
 
@@ -240,78 +226,46 @@
             .container {
                 padding: 20px 15px;
                 max-width: 95vw;
+                border-radius: 15px;
             }
 
             h1 {
-                font-size: 20px;
-                margin-bottom: 5px;
+                font-size: 22px;
+                margin-bottom: 15px;
             }
 
             .subtitle {
-                font-size: 12px;
-                margin-bottom: 15px;
-            }
-
-            .names {
-                padding: 10px;
-                margin-bottom: 15px;
-            }
-
-            .name-item {
-                margin: 5px 0;
                 font-size: 14px;
-            }
-
-            .heart {
-                font-size: 40px;
-                margin-bottom: 10px;
-            }
-
-            .gif-container {
-                display: none;
+                margin-bottom: 20px;
             }
 
             .buttons {
                 flex-direction: row;
-                gap: 10px;
+                gap: 15px;
                 margin-top: 20px;
             }
 
             button {
-                padding: 10px 25px;
+                padding: 12px 25px;
                 font-size: 14px;
-                min-width: 100px;
+                min-width: 110px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="heart">❤️</div>
-        <h1>Will You Be My Valentine?</h1>
-        <p class="subtitle">A special question for someone special</p>
-
-        <div class="names" id="namesContainer">
-            <div class="name-item">
-                <span class="name-label">From:</span> <span id="fromName">Your Name</span>
-            </div>
-            <div class="name-item">
-                <span class="name-label">To:</span> <span id="toName">Valentine's Name</span>
-            </div>
-        </div>
-
-        <div class="gif-container">
-            <img src="https://media.giphy.com/media/g9GW6SCZX9E8iMCYIC/giphy.gif" alt="Love animation">
-        </div>
+        <h1><span id="toName">Name</span>, will you be my Valentine?</h1>
+        <p class="subtitle">Choose wisely. (The "No" button is… shy.)</p>
 
         <div class="buttons">
-            <button class="yes-btn" onclick="respondYes()">YES! 💕</button>
-            <button class="no-btn" id="noBtn" onclick="moveNo()">No</button>
+            <button class="yes-btn" onclick="respondYes()">YES</button>
+            <button class="no-btn" id="noBtn" onclick="moveNo()">NO</button>
         </div>
 
         <div class="success-message" id="successMessage">
-            <h2>Congratulations! 🎉</h2>
-            <p>You just made someone very happy!</p>
+            <h2>YES! 🎉💕</h2>
+            <p>You just made me the happiest person!</p>
         </div>
     </div>
 
@@ -319,29 +273,25 @@
         // Get URL parameters
         function getUrlParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param) || 'Your Name';
+            return urlParams.get(param) || '';
         }
 
         // Set names from URL parameters
         window.addEventListener('load', function() {
-            const fromName = getUrlParam('name');
             const toName = getUrlParam('valentineName');
             
-            document.getElementById('fromName').textContent = fromName;
-            document.getElementById('toName').textContent = toName;
-            document.title = fromName + ' loves ' + toName;
+            if (toName) {
+                document.getElementById('toName').textContent = toName;
+                document.title = toName + ', will you be my Valentine?';
+            }
         });
 
         // Yes button response
         function respondYes() {
-            const fromName = document.getElementById('fromName').textContent;
-            const toName = document.getElementById('toName').textContent;
-            
             document.querySelector('.buttons').style.display = 'none';
             document.getElementById('successMessage').style.display = 'block';
             
             createConfetti();
-            playHeartAnimation();
         }
 
         // No button - moves away from cursor
@@ -391,10 +341,10 @@
             for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
-                confetti.innerHTML = '❤️';
+                confetti.innerHTML = '💕';
                 confetti.style.left = Math.random() * 100 + '%';
                 confetti.style.top = '-10px';
-                confetti.style.fontSize = '20px';
+                confetti.style.fontSize = '24px';
                 confetti.style.opacity = Math.random();
                 document.body.appendChild(confetti);
 
@@ -410,15 +360,6 @@
                     }
                 }, 30);
             }
-        }
-
-        // Heart animation
-        function playHeartAnimation() {
-            const heart = document.querySelector('.heart');
-            heart.style.animation = 'none';
-            setTimeout(() => {
-                heart.style.animation = 'heartbeat 0.5s infinite';
-            }, 10);
         }
     </script>
 </body>
