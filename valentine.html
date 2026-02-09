@@ -124,10 +124,9 @@
             background: #dee2e6;
         }
 
-        .no-btn:active {
-            position: relative;
-            left: 200px;
-            top: -200px;
+        .no-btn.moving {
+            position: fixed;
+            z-index: 1000;
         }
 
         .success-message {
@@ -236,15 +235,47 @@
             playHeartAnimation();
         }
 
-        // No button - moves away
+        // No button - moves away from cursor
         function moveNo() {
             const noBtn = document.getElementById('noBtn');
-            const randomX = Math.random() * 300 - 150;
-            const randomY = Math.random() * 300 - 150;
+            noBtn.classList.add('moving');
             
-            noBtn.style.position = 'absolute';
-            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            // Random position on screen
+            const randomX = Math.random() * (window.innerWidth - 150);
+            const randomY = Math.random() * (window.innerHeight - 60);
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
         }
+
+        // Move button away from mouse
+        document.addEventListener('mousemove', function(e) {
+            const noBtn = document.getElementById('noBtn');
+            if (!noBtn.classList.contains('moving')) return;
+            
+            const btnRect = noBtn.getBoundingClientRect();
+            const btnX = btnRect.left + btnRect.width / 2;
+            const btnY = btnRect.top + btnRect.height / 2;
+            
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const distance = Math.sqrt(Math.pow(btnX - mouseX, 2) + Math.pow(btnY - mouseY, 2));
+            
+            // If mouse is close, move button away
+            if (distance < 150) {
+                const angle = Math.atan2(btnY - mouseY, btnX - mouseX);
+                const newX = Math.cos(angle) * 200 + mouseX;
+                const newY = Math.sin(angle) * 200 + mouseY;
+                
+                // Keep button within viewport
+                const finalX = Math.max(0, Math.min(newX, window.innerWidth - 150));
+                const finalY = Math.max(0, Math.min(newY, window.innerHeight - 60));
+                
+                noBtn.style.left = finalX + 'px';
+                noBtn.style.top = finalY + 'px';
+            }
+        });
 
         // Create confetti effect
         function createConfetti() {
