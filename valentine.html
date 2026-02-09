@@ -157,21 +157,130 @@
             border-radius: 10px;
         }
 
-        @media (max-width: 600px) {
+        /* Desktop - Landscape */
+        @media (min-width: 1024px) and (orientation: landscape) {
+            body {
+                min-height: 100vh;
+            }
+
+            .container {
+                padding: 40px 60px;
+                max-width: 700px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .buttons {
+                flex-direction: row;
+            }
+        }
+
+        /* Tablet - Landscape */
+        @media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+            .container {
+                padding: 40px 50px;
+                max-width: 600px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .buttons {
+                flex-direction: row;
+            }
+        }
+
+        /* Mobile - Portrait */
+        @media (max-width: 767px) and (orientation: portrait) {
+            body {
+                min-height: 100vh;
+            }
+
             .container {
                 padding: 40px 20px;
+                max-width: 90vw;
             }
 
             h1 {
                 font-size: 24px;
             }
 
+            .subtitle {
+                font-size: 14px;
+            }
+
             .buttons {
                 flex-direction: column;
+                gap: 15px;
             }
 
             button {
                 width: 100%;
+                padding: 12px 30px;
+            }
+
+            .heart {
+                font-size: 50px;
+            }
+
+            .gif-container img {
+                max-height: 150px;
+            }
+        }
+
+        /* Mobile - Landscape */
+        @media (max-width: 767px) and (orientation: landscape) {
+            body {
+                min-height: 100vh;
+            }
+
+            .container {
+                padding: 20px 15px;
+                max-width: 95vw;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+
+            .names {
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+
+            .name-item {
+                margin: 5px 0;
+                font-size: 14px;
+            }
+
+            .heart {
+                font-size: 40px;
+                margin-bottom: 10px;
+            }
+
+            .gif-container {
+                display: none;
+            }
+
+            .buttons {
+                flex-direction: row;
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            button {
+                padding: 10px 25px;
+                font-size: 14px;
+                min-width: 100px;
             }
         }
     </style>
